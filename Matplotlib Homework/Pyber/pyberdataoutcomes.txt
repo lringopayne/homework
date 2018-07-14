@@ -1,0 +1,5 @@
+Directions: You must include a written description of three observable trends based on the data.
+
+1. Urban City Type spends the most time using ride sharing apps.
+2. Urban city type spends the most amount of money with ride sharing apps.
+3. Rural city type spends the least amount of time using ride sharing apps and least amount of fare money.
