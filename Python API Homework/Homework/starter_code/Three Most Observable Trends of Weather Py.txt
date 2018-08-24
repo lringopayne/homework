@@ -1,0 +1,4 @@
+Three Most Observable Trends of Weather Py
+1. Majority of the cities in month of August 2018 have high humidity levels.
+2. Majority of the cities in month of August 2018 have low to moderate wind speed levels.
+3. There is no significant trend found when you measure the cloudiness level of the cities in August 2018.

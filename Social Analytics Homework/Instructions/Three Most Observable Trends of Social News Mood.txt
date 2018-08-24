@@ -1,0 +1,4 @@
+Three Most Observable Trends of Social News Mood
+1. The overall compound scores of all media outlets are negative.
+2. The most neutral score of all media outlets is @Nytimes.
+3. The most positive score of media outlets is @FoxNews.
