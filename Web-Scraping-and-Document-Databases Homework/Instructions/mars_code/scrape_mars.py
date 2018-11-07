@@ -20,10 +20,12 @@ def scrape():
     # Visit the Mars news page. 
     url = "https://mars.nasa.gov/news/"
     browser.visit(url)
+    time.sleep(4)
 
     #Scrape the page into soup and Search News
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
+    
     search = soup.select_one("li.slide")
 
     # Mars News
@@ -37,8 +39,10 @@ def scrape():
     # JPL Mars Space Images - Featured Image
     url2 = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
     browser.visit(url2)
+    time.sleep(4)
     fullimage = browser.find_by_id("full_image")
     fullimage.click()
+    time.sleep(4)
 
     # Scrape the browser into soup and use soup to find the image of mars
     # Save the image url to a variable called `img_url`
@@ -54,6 +58,7 @@ def scrape():
     # Mars Weather
     url3 = "https://twitter.com/marswxreport?lang=en"
     browser.visit(url3)
+    time.sleep(4)
     html_weather = browser.html
     
     soup3 = BeautifulSoup(html_weather, 'html.parser')
@@ -83,6 +88,7 @@ def scrape():
     # Visit the USGS Astogeology site and scrape pictures of the hemispheres
     url5 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     browser.visit(url5)
+    time.sleep(4)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
     mars_hemis=[]
