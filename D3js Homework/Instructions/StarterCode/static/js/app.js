@@ -1,14 +1,14 @@
 // Define SVG attributes
-var width = parseInt(d3.select('#scatter')
+let width = parseInt(d3.select('#scatter')
     .style("width"));
 
-var height = width * 2/3;
-var margin = 20;
-var labelArea = 110;
-var padding = 45;
+let height = width * 2/3;
+let margin = 20;
+let labelArea = 110;
+let padding = 45;
 
 // Create SVG object 
-var svg = d3.select("#scatter")
+let svg = d3.select("#scatter")
     .append("svg")
     .attr("width", width)
     .attr("height", height)
@@ -17,11 +17,11 @@ var svg = d3.select("#scatter")
 // Labels for axes=================================
 // Add first g - tag for x axis text (css class)
 svg.append("g").attr("class", "xText");
-var xText = d3.select(".xText");
+let xText = d3.select(".xText");
 
 // Transform to adjust for xText
-var bottomTextX =  (width - labelArea)/2 + labelArea;
-var bottomTextY = height - margin - padding;
+let bottomTextX =  (width - labelArea)/2 + labelArea;
+let bottomTextY = height - margin - padding;
 xText.attr("transform",`translate(
     ${bottomTextX}, 
     ${bottomTextY})`
@@ -41,23 +41,23 @@ xText.append("text")
     .attr("data-name", "age")
     .attr("data-axis", "x")
     .attr("class","aText inactive x")
-    .text("Age (Median)");
+    .text("Age");
 
 xText.append("text")
     .attr("y", 19)
     .attr("data-name", "income")
     .attr("data-axis", "x")
     .attr("class","aText inactive x")
-    .text("Household Income (Median)");
+    .text("Household Income");
 
 // y-axis (left)___________________________________
 // Second g tag for yText (css class)
 svg.append("g").attr("class", "yText");
-var yText = d3.select(".yText");
+let yText = d3.select(".yText");
 
 // Transform to adjust for yText
-var leftTextX =  margin + padding;
-var leftTextY = (height + labelArea) / 2 - labelArea;
+let leftTextX =  margin + padding;
+let leftTextY = (height + labelArea) / 2 - labelArea;
 yText.attr("transform",`translate(
     ${leftTextX}, 
      ${leftTextY}
@@ -85,11 +85,11 @@ yText .append("text")
     .attr("data-name", "healthcare")
     .attr("data-axis", "y")
     .attr("class", "aText inactive y")
-    .text("Lacks Healthcare (%)");
+    .text("Healthcare (%)");
     
 // Visualize data  _______________________________________  
 // Define dynamic circle radius
-var cRadius;
+let cRadius;
 function adjustRadius() {
   if (width <= 530) {
     cRadius = 7;}
@@ -100,27 +100,27 @@ adjustRadius();
 
 // Read in data as promise... and then... newer d3.js method
 d3.csv("static/data/data.csv").then(function(data) {
-    visualize(data);
+    view(data);
 });
 
-function visualize (csvData) {
-   var xMin;
-   var xMax;
-   var yMin;
-   var yMax;
+function view (healthData) {
+   let xMin;
+   let xMax;
+   let yMin;
+   let yMax;
 
    // Current X & Y default selections
-   var currentX = "poverty";
-   var currentY = "obesity";
+   let currentX = "poverty";
+   let currentY = "obesity";
 
    // Tool Tip info box (state, X stats,  Y stats)
-   var toolTip = d3.tip()
+   let toolTip = d3.tip()
       .attr("class", "d3-tip")
       .offset([40, -60])
       .html(function(d) {
             //Build text box
-            var stateLine = `<div>${d.state}</div>`;
-            var yLine = `<div>${currentY}: ${d[currentY]}%</div>`;
+            let stateLine = `<div>${d.state}</div>`;
+            let yLine = `<div>${currentY}: ${d[currentY]}%</div>`;
             if (currentX === "poverty") {
                 xLine = `<div>${currentX}: ${d[currentX]}%</div>`}          
             else {
@@ -146,19 +146,19 @@ function visualize (csvData) {
 
     // Find the data max & min values for scaling
     function xMinMax() {
-      xMin = d3.min(csvData, function(d) {
+      xMin = d3.min(healthData, function(d) {
         return parseFloat(d[currentX]) * 0.85;
       });
-      xMax = d3.max(csvData, function(d) {
+      xMax = d3.max(healthData, function(d) {
         return parseFloat(d[currentX]) * 1.15;
       });     
     }
 
     function yMinMax() {
-      yMin = d3.min(csvData, function(d) {
+      yMin = d3.min(healthData, function(d) {
         return parseFloat(d[currentY]) * 0.85;
       });
-      yMax = d3.max(csvData, function(d) {
+      yMax = d3.max(healthData, function(d) {
         return parseFloat(d[currentY]) * 1.15;
       }); 
     }
@@ -167,19 +167,19 @@ function visualize (csvData) {
     xMinMax();
     yMinMax();
 
-    var xScale = d3 
+    let xScale = d3 
         .scaleLinear()
         .domain([xMin, xMax])
         .range([margin + labelArea, width - margin])
 
-    var yScale = d3
+    let yScale = d3
         .scaleLinear()
         .domain([yMin, yMax])
         .range([height - margin - labelArea, margin])
 
     // Create scaled X and Y axis
-    var xAxis = d3.axisBottom(xScale);
-    var yAxis = d3.axisLeft(yScale);
+    let xAxis = d3.axisBottom(xScale);
+    let yAxis = d3.axisLeft(yScale);
 
     // Calculate X and Y tick counts
     function tickCount() {
@@ -212,7 +212,7 @@ function visualize (csvData) {
         );
 
     // Append the circles for each row of data
-    var allCircles = svg.selectAll("g allCircles").data(csvData).enter();
+    let allCircles = svg.selectAll("g allCircles").data(healthData).enter();
 
     allCircles.append("circle")
         .attr("cx", function(d) {
@@ -268,13 +268,13 @@ function visualize (csvData) {
 
           // Dynamic graph on click
           d3.selectAll(".aText").on("click", function() {
-              var self = d3.select(this)
+              let self = d3.select(this)
 
               // Select inactive
               if (self.classed("inactive")) {
                 // Obtain name and axis saved in the label
-                var axis = self.attr("data-axis")
-                var name = self.attr("data-name")
+                let axis = self.attr("data-axis")
+                let name = self.attr("data-name")
 
                 if (axis === "x") {
                   currentX = name;
