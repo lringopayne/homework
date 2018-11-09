@@ -99,7 +99,7 @@ function view (healthData) {
 
    // Current X & Y default selections
    let currentX = "poverty";
-   let currentY = "obesity";
+   let currentY = "healthcare";
 
    // Tool Tip info box (state, X stats,  Y stats)
    let toolTip = d3.tip()
