@@ -15,7 +15,7 @@ let svg = d3.select("#scatter")
     .attr("class", "chart");
 
 // Labels for axes=================================
-// Add first g - tag for x axis text (css class)
+// Add first g - tag for x axis text 
 svg.append("g").attr("class", "xText");
 let xText = d3.select(".xText");
 
@@ -28,7 +28,7 @@ xText.attr("transform",`translate(
     );
 
 // x-axis (bottom) ______________________________
-// Build xText details (css class)
+// Build xText details 
 xText.append("text")
     .attr("y", -19)
     .attr("data-name", "poverty")
@@ -44,7 +44,7 @@ xText.append("text")
     .text("Age");
 
 // y-axis (left)___________________________________
-// Second g tag for yText (css class)
+// Second g tag for yText 
 svg.append("g").attr("class", "yText");
 let yText = d3.select(".yText");
 
@@ -58,7 +58,7 @@ yText.attr("transform",`translate(
     );
 
 // y-axis (left) ______________________________
-// Build yText details (css class)
+// Build yText details 
 
 
 yText .append("text")
