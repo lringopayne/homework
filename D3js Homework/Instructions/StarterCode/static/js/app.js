@@ -43,13 +43,6 @@ xText.append("text")
     .attr("class","aText inactive x")
     .text("Age");
 
-xText.append("text")
-    .attr("y", 19)
-    .attr("data-name", "income")
-    .attr("data-axis", "x")
-    .attr("class","aText inactive x")
-    .text("Household Income");
-
 // y-axis (left)___________________________________
 // Second g tag for yText (css class)
 svg.append("g").attr("class", "yText");
@@ -66,12 +59,7 @@ yText.attr("transform",`translate(
 
 // y-axis (left) ______________________________
 // Build yText details (css class)
-yText .append("text")
-    .attr("y", -22)
-    .attr("data-name", "obesity")
-    .attr("data-axis", "y")
-    .attr("class", "aText active y")
-    .text("Obese (%)");
+
 
 yText .append("text")
     .attr("y", 0)
